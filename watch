@@ -1,19 +1,22 @@
 #!/usr/local/bin/julia -q --color=yes
 
-watch(filename, cmd) = begin
-  watch_file(filename)
-
+safeRun(cmd) = begin
   try
     run(`$(cmd)`)
   catch
     println("wait to be modified")
   end
+end
 
+watch(filename, cmd) = begin
+  watch_file(filename)
+  safeRun(cmd)
   watch(filename, cmd)
 end
 
 if length(ARGS) < 2
   print_with_color(:green, "arguments is needed")
 else
+  safeRun(ARGS[2])
   watch(ARGS[1], ARGS[2])
 end

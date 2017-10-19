@@ -49,7 +49,15 @@ format() = begin
 
   for row in rows
     for field in fields
-      push!(body["data"][Symbol(field)], row["cell"][field])
+      val = row["cell"][field]
+
+      if ismatch(r"^\-?\d+\.\d{2}\%$", val)
+        val = parse(Float64, replace(val, "%", ""))
+      elseif val == "-"
+        val = NA
+      end
+
+      push!(body["data"][Symbol(field)], val)
     end
   end
 
