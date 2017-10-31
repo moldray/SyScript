@@ -1,0 +1,11 @@
+#!/usr/local/bin/julia -q --color=yes
+
+MAIN = "https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts"
+MIRROR = "https://coding.net/u/scaffrey/p/hosts/git/raw/master/hosts-files/hosts"
+HOSTS = "/tmp/hosts.new"
+
+try
+  download(MAIN, HOSTS)
+catch
+  download(MIRROR, HOSTS)
+end
