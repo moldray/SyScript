@@ -1,0 +1,11 @@
+#!/usr/local/bin/julia -q --color=yes
+
+
+gitSource = "https://raw.githubusercontent.com/googlehosts/hosts/master/hosts-files/hosts"
+bakSource = "https://coding.net/u/scaffrey/p/hosts/git/raw/master/hosts-files/hosts"
+
+try
+  download(gitSource, "./tmp/hosts")
+catch
+  download(bakSource, "./tmp/hosts")
+end
