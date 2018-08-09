@@ -39,6 +39,7 @@ rm(args) = begin
   for (i, item) in enumerate(onepw)
     if args[1] == item.id
       splice!(onepw, i)
+      break
     end
   end
   ls([])
